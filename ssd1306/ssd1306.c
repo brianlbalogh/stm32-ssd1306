@@ -100,7 +100,11 @@ void ssd1306_Init(void) {
 #endif
 
     ssd1306_WriteCommand(0xA8); //--set multiplex ratio(1 to 64) - CHECK
+#if SSD1306_HEIGHT==32
+    ssd1306_WriteCommand(0x1F); //
+#else
     ssd1306_WriteCommand(0x3F); //
+#endif
 
     ssd1306_WriteCommand(0xA4); //0xa4,Output follows RAM content;0xa5,Output ignores RAM content
 
@@ -114,7 +118,11 @@ void ssd1306_Init(void) {
     ssd1306_WriteCommand(0x22); //
 
     ssd1306_WriteCommand(0xDA); //--set com pins hardware configuration - CHECK
+#if SSD1306_HEIGHT==32
+    ssd1306_WriteCommand(0x02);
+#else
     ssd1306_WriteCommand(0x12);
+#endif
 
     ssd1306_WriteCommand(0xDB); //--set vcomh
     ssd1306_WriteCommand(0x20); //0x20,0.77xVcc
